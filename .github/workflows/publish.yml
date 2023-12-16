@@ -1,0 +1,51 @@
+name: Publish
+on: workflow_dispatch
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        project:
+          - '1.16.5-fabric'
+          - '1.16.5-forge'
+          - '1.17.1-fabric'
+          - '1.17.1-forge'
+          - '1.18.2-fabric'
+          - '1.18.2-forge'
+          - '1.18.2-quilt'
+          - '1.19.2-fabric'
+          - '1.19.2-forge'
+          - '1.19.2-quilt'
+          - '1.19.3-fabric'
+          - '1.19.3-forge'
+          - '1.19.3-quilt'
+          - '1.19.4-fabric'
+          - '1.19.4-forge'
+          - '1.19.4-quilt'
+          - '1.20.1-fabric'
+          - '1.20.1-forge'
+          - '1.20.1-quilt'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Config Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      - name: Apply Cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: $${{ runner.os }}-gradle
+      - name: Build
+        id: build
+        env:
+          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
+          MODRINTH_PROJECT_ID: ${{ secrets.MODRINTH_PROJECT_ID }}
+          CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
+          CURSEFORGE_PROJECT_ID: ${{ secrets.CURSEFORGE_PROJECT_ID }}
+        run: ./gradlew :${{ matrix.project }}:build :${{ matrix.project }}:modrinth :${{ matrix.project }}:curseforge

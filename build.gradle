@@ -1,7 +1,3 @@
-import java.time.Instant
-import java.time.format.DateTimeFormatter
-import java.time.temporal.ChronoUnit
-
 interface EnchantIconExtension {
     // Which platform (i.e. Fabric/Forge/Quilt) is this implementation is on?
     // In case of no modding platform, use 'Vanilla'.
@@ -85,8 +81,7 @@ subprojects { Project p ->
                     "Specification-Version": "1", // We are version 1 of ourselves
                     "Implementation-Title": "${pAfter.archivesBaseName}",
                     "Implementation-Version": "${pAfter.version}",
-                    "Implementation-Vendor": "Akvamaro Glacirivero",
-                    "Implementation-Timestamp": DateTimeFormatter.ISO_INSTANT.format(Instant.now().truncatedTo(ChronoUnit.SECONDS))
+                    "Implementation-Vendor": "Akvamaro Glacirivero"
             ])
         }
     }
