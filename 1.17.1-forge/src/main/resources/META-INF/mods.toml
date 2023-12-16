@@ -1,0 +1,19 @@
+modLoader="javafml"
+loaderVersion="[37,)"
+license="ARR"
+issueTrackerURL="https://example.invalid/"
+#logoFile="logo.png"
+
+[[mods]]
+modId="enchant_icon"
+version="${file.jarVersion}"
+displayName="Enchant Icon"
+displayURL="https://example.com"
+description="[ACCESS DENIED]"
+authors="YuriCat, 水蓝冰青"
+credits="Violet Modding, for their multi-loader project architecture used in Botania"
+
+[[dependencies.enchant_icon]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.17,1.17.1]"

@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "enchant_icon",
+  "version": "${version}",
+  "name": "Enchant Icon",
+  "description": "[REDACTED]",
+  "authors": [
+    "YuriCat", "水蓝冰青"
+  ],
+  "contact": {},
+  "license": "ARR",
+  "__icon (we don't have one yet)": "logo.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "mods.enchanticon.fabric.FabricEntryPoint"
+    ],
+    "modmenu": [
+      "mods.enchanticon.fabric.ModMenuInit"
+    ]
+  },
+  "mixins": [
+    "enchant_icon.mixins.json",
+    "enchant_icon_fabric.mixins.json"
+  ],
+  "accessWidener": "enchant_icon.accesswidener",
+  "depends": {
+    "fabric-models-v0": "*",
+    "fabric-key-binding-api-v1": "*",
+    "fabric-screen-api-v1": "*",
+    "minecraft": "1.19.3"
+  }
+}

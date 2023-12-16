@@ -1,0 +1,8 @@
+{
+  "pack": {
+    "pack_format": 12,
+    "forge:resource_pack_format": 12,
+    "forge:data_pack_format": 10,
+    "description": "Assets and data used by Enchant Icon mod."
+  }
+}

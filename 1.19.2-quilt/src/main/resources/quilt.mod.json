@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "quilt_loader": {
+    "group": "mods.enchant_icon",
+    "id": "enchant_icon",
+    "version": "${version}",
+    "metadata": {
+      "name": "Enchant Icon",
+      "description": "[REDACTED]",
+      "contributors": {
+        "YuriCat": "Owner",
+        "水蓝冰青": "Coder"
+      },
+      "contact": {},
+      "license": {
+        "name": "All Rights Reserved",
+        "id": "ARR",
+        "url": "https://example.com/",
+        "description": "All rights reserved unless otherwise noted."
+      },
+      "__icon (we don't have one yet)": "assets/example_mod/icon.png"
+    },
+    "intermediate_mappings": "net.fabricmc:intermediary",
+    "entrypoints": {
+      "client_init": "mods.visualenchanticon.quilt.QuiltEntryPoint",
+      "modmenu": "mods.visualenchanticon.quilt.ModMenuInit"
+    },
+    "depends": [
+      {
+        "id": "quilt_screen",
+        "versions": "*"
+      },
+      {
+        "id": "quilted_fabric_key_binding_api_v1",
+        "versions": "*"
+      },
+      {
+        "id": "quilted_fabric_models_v0",
+        "versions": "*"
+      },
+      {
+        "id": "minecraft",
+        "versions": [ "1.19", "1.19.1", "1.19.2" ]
+      }
+    ]
+  },
+  "mixin": [ "enchant_icon.mixins.json", "enchant_icon_quilt.mixins.json" ]
+}

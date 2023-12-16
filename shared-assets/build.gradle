@@ -1,0 +1,14 @@
+plugins {
+    id('java-library')
+}
+
+enchantIcon {
+    minecraftVersion = 'any'
+    platform = 'VanillaAssets'
+}
+
+// As a resource-only subproject, we really don't produce any compiled code here.
+// But in case we'd like to repurpose it, we need to use the lowest possible compile level.
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 6
+}

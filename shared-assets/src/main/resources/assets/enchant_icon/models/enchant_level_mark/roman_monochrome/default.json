@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "enchant_icon:enchant_icon/level_mark/roman_monochrome/rn_mono_max"
+  }
+}

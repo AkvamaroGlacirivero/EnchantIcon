@@ -1,0 +1,102 @@
+plugins {
+    id 'fabric-loom' version '0.12-SNAPSHOT'
+    id 'io.github.juuxel.loom-quiltflower' version '1.7.1'
+    id 'com.modrinth.minotaur' version '2.+'
+    id 'net.darkhax.curseforgegradle' version '1.1.17'
+}
+
+enchantIcon {
+    minecraftVersion = '1.20.1'
+    platform = 'Fabric'
+}
+
+loom {
+    accessWidenerPath = file('src/main/resources/enchant_icon.accesswidener')
+
+    runs {
+        client {
+            runDir './run-client'
+        }
+        server {
+            runDir './run-server'
+        }
+
+        configureEach {
+            ideConfigGenerated(true)
+        }
+    }
+}
+
+repositories {
+    maven {
+        name = "ParchmentMC"
+        url = "https://maven.parchmentmc.net/"
+    }
+    maven {
+        // ModMenu
+        name = 'TerraformerMC'
+        url = 'https://maven.terraformersmc.com/releases/'
+    }
+    maven {
+        name = 'SheDaniel'
+        url = "https://maven.shedaniel.me/"
+    }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:1.20.1"
+    mappings loom.layered() {
+        officialMojangMappings()
+        //parchment("org.parchmentmc.data:parchment-1.19.3:2022.12.18@zip")
+    }
+    modImplementation "net.fabricmc:fabric-loader:0.14.21"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:0.83.0+1.20.1"
+    api project(":1.20.1-base")
+
+    modApi("me.shedaniel.cloth:cloth-config-fabric:11.0.99") {
+        exclude(group: "net.fabricmc.fabric-api")
+    }
+
+    // Need this to tell me what mods are present at runtime
+    modApi(group: 'com.terraformersmc', name: 'modmenu', version: '7.1.0') {
+        exclude group: 'net.fabricmc'
+        exclude group: 'net.fabricmc.fabric-api'
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 17
+}
+
+import net.darkhax.curseforgegradle.TaskPublishCurseForge
+
+tasks.register('curseforge', TaskPublishCurseForge) {
+    disableVersionDetection()
+    apiToken = System.getenv("CURSEFORGE_TOKEN") ?: "invalid"
+    def projectId = System.getenv("CURSEFORGE_PROJECT_ID") ?: "-1"
+    def mainFile = it.upload(projectId, remapJar)
+    mainFile.addModLoader('Fabric')
+    mainFile.addGameVersion('1.20', '1.20.1', '1.20.2', '1.20.3', '1.20.4')
+    mainFile.releaseType = 'release'
+    mainFile.changelog = 'See git log for more info'
+    mainFile.addRequirement('fabric-api', 'cloth-config')
+    onlyIf { projectId }
+}
+
+modrinth {
+    token = System.getenv("MODRINTH_TOKEN") ?: "invalid"
+    projectId = System.getenv("MODRINTH_PROJECT_ID") ?: "NaN"
+    loaders = [ 'fabric' ]
+    gameVersions = [ '1.20', '1.20.1', '1.20.2', '1.20.3', '1.20.4' ]
+    uploadFile = remapJar
+    versionNumber = version
+    versionType = 'release' // alpha | beta | release
+    dependencies {
+        required.project 'fabric-api'
+        required.project 'cloth-config'
+    }
+}
+
+tasks.named("modrinth") {
+    onlyIf { projectId }
+}

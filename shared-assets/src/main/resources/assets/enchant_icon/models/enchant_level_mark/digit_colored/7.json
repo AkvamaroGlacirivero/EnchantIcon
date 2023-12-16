@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "enchant_icon:enchant_icon/level_mark/digit_colored/an_colourful_7"
+  }
+}

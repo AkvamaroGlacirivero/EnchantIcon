@@ -1,0 +1,9 @@
+{
+  "sources": [
+    {
+      "type": "directory",
+      "source": "enchant_icon",
+      "prefix": "enchant_icon/"
+    }
+  ]
+}

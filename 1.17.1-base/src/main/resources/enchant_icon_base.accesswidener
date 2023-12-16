@@ -1,0 +1,9 @@
+accessWidener v1 named
+
+# Shared access transformer/widener configuration.
+# This is only effective within the base subproject.
+# To be production-ready, the equivalent config needs to be replicated in
+# platform-specific subprojects (i.e. fabric/forge/quilt)
+
+# Access to the no-arg constructor of ItemOverrides
+accessible method net/minecraft/client/renderer/block/model/ItemOverrides <init> ()V

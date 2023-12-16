@@ -1,0 +1,107 @@
+plugins {
+    id 'eclipse'
+    id 'maven-publish'
+    id 'net.minecraftforge.gradle' version '5.1.+'
+    id 'org.parchmentmc.librarian.forgegradle' version '1.+'
+    id 'org.spongepowered.mixin' version '0.7.+'
+    id 'com.modrinth.minotaur' version '2.+'
+    id 'net.darkhax.curseforgegradle' version '1.1.17'
+}
+
+enchantIcon {
+    minecraftVersion = '1.18.2'
+    platform = 'Forge'
+}
+
+mixin {
+    add sourceSets.main, "enchant_icon.refmap.json"
+
+    config "enchant_icon.mixins.json"
+}
+
+repositories {
+    maven {
+        url = "https://maven.shedaniel.me/"
+    }
+}
+
+minecraft {
+    mappings channel: 'official', version: '1.18.2'
+
+    runs {
+        client {
+            workingDirectory file('./run-client')
+            property 'forge.logging.console.level', 'info'
+            property 'fml.earlyprogresswindow', 'false'
+            ideaModule "${rootProject.name}.${project.name}.main"
+            args '--username', '3TUSK'
+            mods {
+                enchant_icon {
+                    source sourceSets.main
+                    source project(":1.18.2-base").sourceSets.main
+                }
+            }
+        }
+
+        server {
+            workingDirectory file('./run-server')
+            property 'forge.logging.console.level', 'info'
+            property 'fml.earlyprogresswindow', 'false'
+            ideaModule "${rootProject.name}.${project.name}.main"
+            mods {
+                enchant_icon {
+                    source sourceSets.main
+                    source project(":1.18.2-base").sourceSets.main
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    minecraft "net.minecraftforge:forge:1.18.2-40.2.1"
+    compileOnly project(":1.18.2-base")
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+
+    implementation fg.deobf("me.shedaniel.cloth:cloth-config-forge:6.4.90")
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 17
+}
+
+jar {
+    finalizedBy 'reobfJar'
+}
+
+import net.darkhax.curseforgegradle.TaskPublishCurseForge
+
+tasks.register('curseforge', TaskPublishCurseForge) {
+    disableVersionDetection()
+    apiToken = System.getenv("CURSEFORGE_TOKEN") ?: "invalid"
+    def projectId = System.getenv("CURSEFORGE_PROJECT_ID") ?: "-1"
+    def mainFile = it.upload(projectId, jar)
+    mainFile.addModLoader('Forge')
+    mainFile.addGameVersion('1.18', '1.18.1', '1.18.2')
+    mainFile.releaseType = 'release'
+    mainFile.changelog = 'See git log for more info'
+    mainFile.addOptional('cloth-config')
+    onlyIf { projectId }
+}
+
+modrinth {
+    token = System.getenv("MODRINTH_TOKEN") ?: "invalid"
+    projectId = System.getenv("MODRINTH_PROJECT_ID") ?: "NaN"
+    loaders = [ 'fabric' ]
+    gameVersions = [ '1.18', '1.18.1', '1.18.2' ]
+    uploadFile = jar
+    versionNumber = version
+    versionType = 'release' // alpha | beta | release
+    dependencies {
+        optional.project 'cloth-config'
+    }
+}
+
+tasks.named("modrinth") {
+    onlyIf { projectId }
+}

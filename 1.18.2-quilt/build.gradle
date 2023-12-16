@@ -1,0 +1,115 @@
+
+// The example mod template provided by Quilt uses a less-known Gradle feature
+// called Version Catalogs, documented here:
+// https://docs.gradle.org/7.4/userguide/platforms.html#sec:plugins
+// For now we converted them back to the normal way to declare dependency versions.
+// In the future we might want to migrate all of them over.
+
+plugins {
+    id 'maven-publish'
+    id 'org.quiltmc.loom' version '1.0.+'
+    id 'com.modrinth.minotaur' version '2.+'
+    id 'net.darkhax.curseforgegradle' version '1.1.17'
+}
+
+enchantIcon {
+    minecraftVersion = '1.18.2'
+    platform = 'Quilt'
+}
+
+loom {
+    accessWidenerPath = file('src/main/resources/enchant_icon.accesswidener')
+
+    runs {
+        client {
+            runDir './run-client'
+        }
+        server {
+            runDir './run-server'
+        }
+        configureEach {
+            ideConfigGenerated(true)
+        }
+    }
+}
+
+repositories {
+    maven {
+        // ModMenu
+        name = 'TerraformerMC'
+        url = 'https://maven.terraformersmc.com/releases/'
+    }
+
+    maven {
+        name = 'SheDaniel'
+        url "https://maven.shedaniel.me/"
+    }
+}
+
+dependencies {
+    minecraft 'com.mojang:minecraft:1.18.2'
+//    mappings loom.layered {
+//        mappings "org.quiltmc:quilt-mappings:1.18.2+build.24:v2"
+//        officialMojangMappings()
+//    }
+    mappings loom.layered {
+        addLayer quiltMappings.mappings("org.quiltmc:quilt-mappings:1.18.2+build.24:v2")
+        officialMojangMappings() // Uncomment if you want to use Mojang mappings as your primary mappings, falling back on QM for parameters and Javadocs
+    }
+    //mappings "org.quiltmc:quilt-mappings:1.18.2+build.24:v2"
+    modImplementation 'org.quiltmc:quilt-loader:0.17.0'
+    modImplementation 'org.quiltmc.quilted-fabric-api:quilted-fabric-api:1.0.0-beta.20+0.55.1-1.18.2'
+    compileOnly project(":1.18.2-base")
+
+    // Need this to tell me what mods are present at runtime
+    modApi group: 'com.terraformersmc', name: 'modmenu', version: '3.2.2'
+
+    modApi(group: 'me.shedaniel.cloth', name: 'cloth-config-fabric', version: '6.4.90') {
+        exclude group: 'net.fabricmc'
+        exclude group: 'net.fabricmc.fabric-api'
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 17
+}
+
+jar {
+    filesMatching('LICENSE') {
+        rename '^(LICENSE.*?)(\\..*)?$', "\$1_${archivesBaseName}\$2"
+    }
+}
+
+import net.darkhax.curseforgegradle.TaskPublishCurseForge
+
+tasks.register('curseforge', TaskPublishCurseForge) {
+    disableVersionDetection()
+    apiToken = System.getenv("CURSEFORGE_TOKEN") ?: "invalid"
+    def projectId = System.getenv("CURSEFORGE_PROJECT_ID") ?: "-1"
+    def mainFile = it.upload(projectId, remapJar)
+    mainFile.addModLoader('Quilt')
+    mainFile.addGameVersion('1.18', '1.18.1', '1.18.2')
+    mainFile.releaseType = 'release'
+    mainFile.changelog = 'See git log for more info'
+    mainFile.addRequirement('qsl')
+    mainFile.addOptional('cloth-config')
+    onlyIf { projectId }
+}
+
+modrinth {
+    token = System.getenv("MODRINTH_TOKEN") ?: "invalid"
+    projectId = System.getenv("MODRINTH_PROJECT_ID") ?: "NaN"
+    loaders = [ 'quilt' ]
+    gameVersions = [ '1.18', '1.18.1', '1.18.2' ]
+    uploadFile = remapJar
+    versionNumber = version
+    versionType = 'release' // alpha | beta | release
+    dependencies {
+        required.project 'qsl'
+        optional.project 'cloth-config'
+    }
+}
+
+tasks.named("modrinth") {
+    onlyIf { projectId }
+}

@@ -1,0 +1,27 @@
+plugins {
+    id('java')
+    id('org.spongepowered.gradle.vanilla') version '0.2.1-SNAPSHOT'
+}
+
+enchantIcon {
+    minecraftVersion = '1.19.2'
+    platform = 'Vanilla'
+}
+
+minecraft {
+    version '1.19.2'
+    accessWideners 'src/main/resources/enchant_icon_base.accesswidener'
+}
+
+repositories {
+}
+
+dependencies {
+    compileOnly group: 'org.spongepowered', name: 'mixin', version: '0.8.5'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 17
+}
+
+// publishing {} // TODO Maven publish

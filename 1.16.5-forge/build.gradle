@@ -1,0 +1,125 @@
+plugins {
+    id "dev.architectury.loom" version "0.12.0-SNAPSHOT"
+    id "maven-publish"
+    id 'com.modrinth.minotaur' version '2.+'
+    id 'net.darkhax.curseforgegradle' version '1.1.17'
+}
+
+enchantIcon {
+    minecraftVersion = '1.16.5'
+    platform = 'Forge'
+}
+
+loom {
+    // use this if you are using the official mojang mappings
+    // and want loom to stop warning you about their license
+    silentMojangMappingsLicense()
+
+    // since loom 0.10, you are **required** to use the
+    // "forge" block to configure forge-specific features,
+    // such as the mixinConfigs array or datagen
+    forge {
+        // specify the mixin configs used in this mod
+        // this will be added to the jar manifest as well!
+        mixinConfigs = [
+                "enchant_icon.mixins.json"
+        ]
+
+        // missing access transformers?
+        // don't worry, you can still use them!
+        // note that your AT *MUST* be located at
+        // src/main/resources/META-INF/accesstransformer.cfg
+        // to work as there is currently no config option to change this.
+        // also, any names used in your access transformer will need to be
+        // in SRG mapped ("func_" / "field_" with MCP class names) to work!
+        // (both of these things may be subject to change in the future)
+    }
+
+    runs {
+        client {
+            runDir './run-client'
+        }
+        server {
+            runDir './run-server'
+        }
+        configureEach {
+            ideConfigGenerated(true)
+        }
+    }
+}
+
+repositories {
+    maven {
+        url "https://maven.shedaniel.me/"
+    }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:1.16.5"
+
+    mappings loom.officialMojangMappings()
+
+    forge "net.minecraftforge:forge:1.16.5-36.2.39"
+
+    compileOnly project(":1.16.5-base")
+
+    modApi "me.shedaniel.cloth:cloth-config-forge:4.16.91"
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 8
+}
+
+compileJava {
+    source(project(":1.16.5-base").sourceSets.main.allSource)
+}
+
+sourcesJar {
+    from project(":1.16.5-base").sourceSets.main.allJava
+}
+
+processResources {
+    from project(":shared-assets").sourceSets.main.resources
+    from project(":1.16.5-base").sourceSets.main.resources
+
+    // define properties that can be used during resource processing
+    inputs.property "version", project.version
+
+    // this will replace the property "${version}" in your mods.toml
+    // with the version you've defined in your gradle.properties
+    filesMatching("META-INF/mods.toml") {
+        expand "version": project.version
+    }
+}
+
+import net.darkhax.curseforgegradle.TaskPublishCurseForge
+
+tasks.register('curseforge', TaskPublishCurseForge) {
+    disableVersionDetection()
+    apiToken = System.getenv("CURSEFORGE_TOKEN") ?: "invalid"
+    def projectId = System.getenv("CURSEFORGE_PROJECT_ID") ?: "-1"
+    def mainFile = it.upload(projectId, remapJar)
+    mainFile.addModLoader('Forge')
+    mainFile.addGameVersion('1.16', '1.16.1', '1.16.2', '1.16.3', '1.16.4', '1.16.5')
+    mainFile.releaseType = 'release'
+    mainFile.changelog = 'See git log for more info'
+    mainFile.addOptional('cloth-config')
+    onlyIf { projectId }
+}
+
+modrinth {
+    token = System.getenv("MODRINTH_TOKEN") ?: "invalid"
+    projectId = System.getenv("MODRINTH_PROJECT_ID") ?: "NaN"
+    loaders = [ 'forge' ]
+    gameVersions = [ '1.16', '1.16.1', '1.16.2', '1.16.3', '1.16.4', '1.16.5' ]
+    uploadFile = remapJar
+    versionNumber = version
+    versionType = 'release' // alpha | beta | release
+    dependencies {
+        optional.project 'cloth-config'
+    }
+}
+
+tasks.named("modrinth") {
+    onlyIf { projectId }
+}

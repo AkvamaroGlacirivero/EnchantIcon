@@ -1,0 +1,196 @@
+{
+  "loader": "enchant_icon:enchant_icon",
+  "background": {
+    "sticky_note": {
+      "parent": "enchant_icon:enchant_bg/sticky_note"
+    },
+    "enchanted_book": {
+      "parent": "enchant_icon:enchant_bg/enchanted_book"
+    }
+  },
+  "level_mark": {
+    "digit_colored": {
+      "1": {
+        "parent": "enchant_icon:enchant_level_mark/digit_colored/1"
+      },
+      "2": {
+        "parent": "enchant_icon:enchant_level_mark/digit_colored/2"
+      },
+      "3": {
+        "parent": "enchant_icon:enchant_level_mark/digit_colored/3"
+      },
+      "4": {
+        "parent": "enchant_icon:enchant_level_mark/digit_colored/4"
+      },
+      "5": {
+        "parent": "enchant_icon:enchant_level_mark/digit_colored/5"
+      },
+      "6": {
+        "parent": "enchant_icon:enchant_level_mark/digit_colored/6"
+      },
+      "7": {
+        "parent": "enchant_icon:enchant_level_mark/digit_colored/7"
+      },
+      "8": {
+        "parent": "enchant_icon:enchant_level_mark/digit_colored/8"
+      },
+      "9": {
+        "parent": "enchant_icon:enchant_level_mark/digit_colored/9"
+      },
+      "10": {
+        "parent": "enchant_icon:enchant_level_mark/digit_colored/10"
+      },
+      "default": {
+        "parent": "enchant_icon:enchant_level_mark/digit_colored/default"
+      }
+    },
+    "digit_monochrome": {
+      "1": {
+        "parent": "enchant_icon:enchant_level_mark/digit_monochrome/1"
+      },
+      "2": {
+        "parent": "enchant_icon:enchant_level_mark/digit_monochrome/2"
+      },
+      "3": {
+        "parent": "enchant_icon:enchant_level_mark/digit_monochrome/3"
+      },
+      "4": {
+        "parent": "enchant_icon:enchant_level_mark/digit_monochrome/4"
+      },
+      "5": {
+        "parent": "enchant_icon:enchant_level_mark/digit_monochrome/5"
+      },
+      "6": {
+        "parent": "enchant_icon:enchant_level_mark/digit_monochrome/6"
+      },
+      "7": {
+        "parent": "enchant_icon:enchant_level_mark/digit_monochrome/7"
+      },
+      "8": {
+        "parent": "enchant_icon:enchant_level_mark/digit_monochrome/8"
+      },
+      "9": {
+        "parent": "enchant_icon:enchant_level_mark/digit_monochrome/9"
+      },
+      "10": {
+        "parent": "enchant_icon:enchant_level_mark/digit_monochrome/10"
+      },
+      "default": {
+        "parent": "enchant_icon:enchant_level_mark/digit_monochrome/default"
+      }
+    },
+    "roman_colored": {
+      "1": {
+        "parent": "enchant_icon:enchant_level_mark/roman_colored/1"
+      },
+      "2": {
+        "parent": "enchant_icon:enchant_level_mark/roman_colored/2"
+      },
+      "3": {
+        "parent": "enchant_icon:enchant_level_mark/roman_colored/3"
+      },
+      "4": {
+        "parent": "enchant_icon:enchant_level_mark/roman_colored/4"
+      },
+      "5": {
+        "parent": "enchant_icon:enchant_level_mark/roman_colored/5"
+      },
+      "6": {
+        "parent": "enchant_icon:enchant_level_mark/roman_colored/6"
+      },
+      "7": {
+        "parent": "enchant_icon:enchant_level_mark/roman_colored/7"
+      },
+      "8": {
+        "parent": "enchant_icon:enchant_level_mark/roman_colored/8"
+      },
+      "9": {
+        "parent": "enchant_icon:enchant_level_mark/roman_colored/9"
+      },
+      "10": {
+        "parent": "enchant_icon:enchant_level_mark/roman_colored/10"
+      },
+      "default": {
+        "parent": "enchant_icon:enchant_level_mark/roman_colored/default"
+      }
+    },
+    "roman_monochrome": {
+      "1": {
+        "parent": "enchant_icon:enchant_level_mark/roman_monochrome/1"
+      },
+      "2": {
+        "parent": "enchant_icon:enchant_level_mark/roman_monochrome/2"
+      },
+      "3": {
+        "parent": "enchant_icon:enchant_level_mark/roman_monochrome/3"
+      },
+      "4": {
+        "parent": "enchant_icon:enchant_level_mark/roman_monochrome/4"
+      },
+      "5": {
+        "parent": "enchant_icon:enchant_level_mark/roman_monochrome/5"
+      },
+      "6": {
+        "parent": "enchant_icon:enchant_level_mark/roman_monochrome/6"
+      },
+      "7": {
+        "parent": "enchant_icon:enchant_level_mark/roman_monochrome/7"
+      },
+      "8": {
+        "parent": "enchant_icon:enchant_level_mark/roman_monochrome/8"
+      },
+      "9": {
+        "parent": "enchant_icon:enchant_level_mark/roman_monochrome/9"
+      },
+      "10": {
+        "parent": "enchant_icon:enchant_level_mark/roman_monochrome/10"
+      },
+      "default": {
+        "parent": "enchant_icon:enchant_level_mark/roman_monochrome/default"
+      }
+    },
+    "vanilla": {
+      "1": {
+        "parent": "enchant_icon:enchant_level_mark/vanilla/1"
+      },
+      "2": {
+        "parent": "enchant_icon:enchant_level_mark/vanilla/2"
+      },
+      "3": {
+        "parent": "enchant_icon:enchant_level_mark/vanilla/3"
+      },
+      "4": {
+        "parent": "enchant_icon:enchant_level_mark/vanilla/4"
+      },
+      "5": {
+        "parent": "enchant_icon:enchant_level_mark/vanilla/5"
+      },
+      "6": {
+        "parent": "enchant_icon:enchant_level_mark/vanilla/6"
+      },
+      "default": {
+        "parent": "enchant_icon:enchant_level_mark/vanilla/default"
+      }
+    },
+    "color_blind": {
+      "1": {
+        "parent": "enchant_icon:enchant_level_mark/color_blind/1"
+      },
+      "2": {
+        "parent": "enchant_icon:enchant_level_mark/color_blind/2"
+      },
+      "3": {
+        "parent": "enchant_icon:enchant_level_mark/color_blind/3"
+      },
+      "4": {
+        "parent": "enchant_icon:enchant_level_mark/color_blind/4"
+      },
+      "5": {
+        "parent": "enchant_icon:enchant_level_mark/color_blind/5"
+      },
+      "default": {
+        "parent": "enchant_icon:enchant_level_mark/color_blind/default"
+      }
+    }
+  }
+}

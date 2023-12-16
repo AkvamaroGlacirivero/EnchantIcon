@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "mods.enchanticon.mixin.base",
+  "compatibilityLevel": "JAVA_16",
+  "client": [
+    "ItemRendererMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "refmap": "enchant_icon.refmap.json"
+}
