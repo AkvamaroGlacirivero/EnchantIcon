@@ -108,5 +108,5 @@ modrinth {
 }
 
 tasks.named("modrinth") {
-    onlyIf { projectId }
+    onlyIf { System.getenv("MODRINTH_PROJECT_ID") }
 }
