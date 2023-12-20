@@ -92,7 +92,7 @@ tasks.register('curseforge', TaskPublishCurseForge) {
 modrinth {
     token = System.getenv("MODRINTH_TOKEN") ?: "invalid"
     projectId = System.getenv("MODRINTH_PROJECT_ID") ?: "NaN"
-    loaders = [ 'fabric' ]
+    loaders = [ 'forge' ]
     gameVersions = [ '1.18', '1.18.1', '1.18.2' ]
     uploadFile = jar
     versionNumber = version

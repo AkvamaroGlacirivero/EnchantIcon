@@ -15,7 +15,7 @@ subprojects { Project p ->
     java.withSourcesJar()
 
     p.archivesBaseName = "EnchantIcon"
-    p.version = "1.0.0"
+    p.version = "1.0.1"
     if (System.getenv().CI && System.getenv().GITHUB_RUN_NUMBER) {
         p.version += "-${System.getenv().GITHUB_RUN_NUMBER}"
     } else {
