@@ -1,0 +1,15 @@
+{
+  "enchant_icon.key": "附魔图标",
+  "enchant_icon.key.toggle": "切换附魔图标",
+
+  "enchant_icon.config": "附魔图标设置",
+  "enchant_icon.config.general": "常规设置",
+  "enchant_icon.config.background_type": "背景类型",
+  "enchant_icon.config.background_type.tooltip": "背景的纹理类型。 ",
+  "enchant_icon.config.level_mark_type": "等级标记",
+  "enchant_icon.config.level_mark_type.tooltip": "水平标记附魔等级。 ",
+  "enchant_icon.config.scope_for_gui_like": "物品栏显示",
+  "enchant_icon.config.scope_for_gui_like.tooltip": "在物品栏中显示附魔图标。",
+  "enchant_icon.config.scope_for_hand_held": "手持显示",
+  "enchant_icon.config.scope_for_hand_held.tooltip": "在手持时显示附魔物品时附魔图标。"
+}
