@@ -4,7 +4,7 @@
   "package": "mods.enchanticon.mixin.base",
   "compatibilityLevel": "JAVA_8",
   "client": [
-    "mods.enchanticon.mixin.base.ItemRendererMixin"
+    "ItemRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
