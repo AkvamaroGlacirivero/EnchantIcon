@@ -25,10 +25,13 @@ subprojects { Project p ->
     p.repositories {
         // Enable maven central for all subprojects
         mavenCentral()
-        // Enable sponge maven for all subprojects, for access to Mixin
+        // Enable NeoForge maven for all subprojects, for access to Mixin
         maven {
-            name = 'SpongePowered'
-            url = 'https://repo.spongepowered.org/repository/maven-public/'
+            name = 'NeoForged Maven'
+            url = 'https://maven.neoforged.net/releases/'
+            content {
+                includeGroup 'org.spongepowered'
+            }
         }
     }
 
