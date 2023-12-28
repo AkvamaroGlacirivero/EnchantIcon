@@ -77,6 +77,9 @@ public class CyclingEnchantmentIconOverride extends ItemOverrides {
             }
             return PuppetModel.Factory.createFrom(model, assembled, item.getItem() == Items.ENCHANTED_BOOK);
         }
+        // Delegate to the original ItemOverrides, so things like clock and compass work properly
+        ItemOverrides originalOverrides = model.getOverrides();
+        model = originalOverrides.resolve(model, item, level, holder);
         return model;
     }
 
