@@ -24,25 +24,25 @@ public class ModMenuInit implements ModMenuApi {
         ConfigCategory generalCategory = builder.getOrCreateCategory(new TranslatableComponent("enchant_icon.config.general"));
         generalCategory.addEntry(builder.entryBuilder()
                 .startEnumSelector(new TranslatableComponent("enchant_icon.config.background_type"), BackgroundType.class, ModConfigImpl.backgroundTypeProp.getRealValue())
-                .setDefaultValue(ModConfigImpl.backgroundTypeProp::value)
+                .setDefaultValue(BackgroundType.STICKY_NOTE)
                 .setTooltip(new TranslatableComponent("enchant_icon.config.background_type.tooltip"))
                 .setSaveConsumer(newValue -> ModConfigImpl.backgroundTypeProp.setValue(newValue, true))
                 .build());
         generalCategory.addEntry(builder.entryBuilder()
                 .startEnumSelector(new TranslatableComponent("enchant_icon.config.level_mark_type"), LevelMarkType.class, ModConfigImpl.levelTypeProp.getRealValue())
-                .setDefaultValue(ModConfigImpl.levelTypeProp::value)
+                .setDefaultValue(LevelMarkType.DIGIT_COLORED)
                 .setTooltip(new TranslatableComponent("enchant_icon.config.level_mark_type.tooltip"))
                 .setSaveConsumer(newValue -> ModConfigImpl.levelTypeProp.setValue(newValue, true))
                 .build());
         generalCategory.addEntry(builder.entryBuilder()
-                .startEnumSelector(new TranslatableComponent("enchant_icon.config.scope_for_gui_like"), ApplyingScope.class, ApplyingScope.ENCHANTED_BOOK_ONLY)
-                .setDefaultValue(ModConfigImpl.applyingScopeInGuiProp::value)
+                .startEnumSelector(new TranslatableComponent("enchant_icon.config.scope_for_gui_like"), ApplyingScope.class, ModConfigImpl.applyingScopeInGuiProp.getRealValue())
+                .setDefaultValue(ApplyingScope.ENCHANTED_BOOK_ONLY)
                 .setTooltip(new TranslatableComponent("enchant_icon.config.scope_for_gui_like.tooltip"))
                 .setSaveConsumer(newValue -> ModConfigImpl.applyingScopeInGuiProp.setValue(newValue, true))
                 .build());
         generalCategory.addEntry(builder.entryBuilder()
-                .startEnumSelector(new TranslatableComponent("enchant_icon.config.scope_for_hand_held"), ApplyingScope.class, ApplyingScope.ENCHANTED_BOOK_ONLY)
-                .setDefaultValue(ModConfigImpl.applyingScopeInHandProp::value)
+                .startEnumSelector(new TranslatableComponent("enchant_icon.config.scope_for_hand_held"), ApplyingScope.class, ModConfigImpl.applyingScopeInHandProp.getRealValue())
+                .setDefaultValue(ApplyingScope.ENCHANTED_BOOK_ONLY)
                 .setTooltip(new TranslatableComponent("enchant_icon.config.scope_for_hand_held.tooltip"))
                 .setSaveConsumer(newValue -> ModConfigImpl.applyingScopeInHandProp.setValue(newValue, true))
                 .build());

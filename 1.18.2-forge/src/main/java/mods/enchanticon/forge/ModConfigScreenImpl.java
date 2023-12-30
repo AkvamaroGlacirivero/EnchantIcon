@@ -18,25 +18,25 @@ public class ModConfigScreenImpl {
         ConfigCategory generalCategory = builder.getOrCreateCategory(new TranslatableComponent("enchant_icon.config.general"));
         generalCategory.addEntry(builder.entryBuilder()
                 .startEnumSelector(new TranslatableComponent("enchant_icon.config.background_type"), BackgroundType.class, ModConfigImpl.backgroundTypeProp.get())
-                .setDefaultValue(ModConfigImpl.backgroundTypeProp)
+                .setDefaultValue(BackgroundType.STICKY_NOTE)
                 .setTooltip(new TranslatableComponent("enchant_icon.config.background_type.tooltip"))
                 .setSaveConsumer(newValue -> ModConfigImpl.backgroundTypeProp.set(newValue))
                 .build());
         generalCategory.addEntry(builder.entryBuilder()
                 .startEnumSelector(new TranslatableComponent("enchant_icon.config.level_mark_type"), LevelMarkType.class, ModConfigImpl.levelTypeProp.get())
-                .setDefaultValue(ModConfigImpl.levelTypeProp)
+                .setDefaultValue(LevelMarkType.DIGIT_COLORED)
                 .setTooltip(new TranslatableComponent("enchant_icon.config.level_mark_type.tooltip"))
                 .setSaveConsumer(newValue -> ModConfigImpl.levelTypeProp.set(newValue))
                 .build());
         generalCategory.addEntry(builder.entryBuilder()
-                .startEnumSelector(new TranslatableComponent("enchant_icon.config.scope_for_gui_like"), ApplyingScope.class, ApplyingScope.ENCHANTED_BOOK_ONLY)
-                .setDefaultValue(ModConfigImpl.applyingScopeInGuiProp)
+                .startEnumSelector(new TranslatableComponent("enchant_icon.config.scope_for_gui_like"), ApplyingScope.class, ModConfigImpl.applyingScopeInGuiProp.get())
+                .setDefaultValue(ApplyingScope.ENCHANTED_BOOK_ONLY)
                 .setTooltip(new TranslatableComponent("enchant_icon.config.scope_for_gui_like.tooltip"))
                 .setSaveConsumer(newValue -> ModConfigImpl.applyingScopeInGuiProp.set(newValue))
                 .build());
         generalCategory.addEntry(builder.entryBuilder()
-                .startEnumSelector(new TranslatableComponent("enchant_icon.config.scope_for_hand_held"), ApplyingScope.class, ApplyingScope.ENCHANTED_BOOK_ONLY)
-                .setDefaultValue(ModConfigImpl.applyingScopeInHandProp)
+                .startEnumSelector(new TranslatableComponent("enchant_icon.config.scope_for_hand_held"), ApplyingScope.class, ModConfigImpl.applyingScopeInHandProp.get())
+                .setDefaultValue(ApplyingScope.ENCHANTED_BOOK_ONLY)
                 .setTooltip(new TranslatableComponent("enchant_icon.config.scope_for_hand_held.tooltip"))
                 .setSaveConsumer(newValue -> ModConfigImpl.applyingScopeInHandProp.set(newValue))
                 .build());
