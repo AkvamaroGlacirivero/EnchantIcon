@@ -13,6 +13,8 @@ import net.minecraftforge.fml.config.ModConfig;
 @Mod.EventBusSubscriber(modid = Constants.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModConfigImpl {
 
+    public static ForgeConfigSpec configSpec;
+
     public static ForgeConfigSpec.EnumValue<BackgroundType> backgroundTypeProp;
     public static ForgeConfigSpec.EnumValue<LevelMarkType> levelTypeProp;
     public static ForgeConfigSpec.EnumValue<ApplyingScope> applyingScopeInGuiProp;
@@ -35,7 +37,7 @@ public class ModConfigImpl {
                 .comment("Scope in which this mod should display enchantment icons, when the item is hand-held by someone.")
                 .translation("enchant_icon.config.scope_for_hand_held")
                 .defineEnum("scope_for_hand_held", ApplyingScope.ENCHANTED_BOOK_ONLY);
-        return builder.build();
+        return (configSpec = builder.build());
     }
 
     @SubscribeEvent

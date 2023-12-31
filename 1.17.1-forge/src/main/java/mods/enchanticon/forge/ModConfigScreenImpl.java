@@ -14,7 +14,8 @@ public class ModConfigScreenImpl {
     public static Screen create(Minecraft mc, Screen previous) {
         ConfigBuilder builder = ConfigBuilder.create()
                 .setParentScreen(previous)
-                .setTitle(new TranslatableComponent("enchant_icon.config"));
+                .setTitle(new TranslatableComponent("enchant_icon.config"))
+                .setSavingRunnable(() -> ModConfigImpl.configSpec.save());
         ConfigCategory generalCategory = builder.getOrCreateCategory(new TranslatableComponent("enchant_icon.config.general"));
         generalCategory.addEntry(builder.entryBuilder()
                 .startEnumSelector(new TranslatableComponent("enchant_icon.config.background_type"), BackgroundType.class, ModConfigImpl.backgroundTypeProp.get())

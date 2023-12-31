@@ -20,7 +20,8 @@ public class ModMenuInit implements ModMenuApi {
     public static Screen create(Screen previous) {
         ConfigBuilder builder = ConfigBuilder.create()
                 .setParentScreen(previous)
-                .setTitle(new TranslatableComponent("enchant_icon.config"));
+                .setTitle(new TranslatableComponent("enchant_icon.config"))
+                .setSavingRunnable(ModConfigImpl.CONFIG_INSTANCE::save);
         ConfigCategory generalCategory = builder.getOrCreateCategory(new TranslatableComponent("enchant_icon.config.general"));
         generalCategory.addEntry(builder.entryBuilder()
                 .startEnumSelector(new TranslatableComponent("enchant_icon.config.background_type"), BackgroundType.class, ModConfigImpl.backgroundTypeProp.getRealValue())
