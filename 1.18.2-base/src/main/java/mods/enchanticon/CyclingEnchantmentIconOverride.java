@@ -70,9 +70,12 @@ public class CyclingEnchantmentIconOverride extends ItemOverrides {
             // Get the cached model, create one if cache misses.
             var assembled = this.cache.get(lookupKey);
             if (assembled == null) {
-                this.cache.put(lookupKey, assembled = this.assemble(lookupKey));
+                assembled = this.assemble(lookupKey);
             }
-            return PuppetModel.Factory.createFrom(model, assembled, item.is(Items.ENCHANTED_BOOK));
+            if (assembled != null) {
+                this.cache.put(lookupKey, assembled);
+                return PuppetModel.Factory.createFrom(model, assembled, item.is(Items.ENCHANTED_BOOK));
+            }
         }
         // Delegate to the original ItemOverrides, so things like clock and compass work properly
         ItemOverrides originalOverrides = model.getOverrides();
@@ -81,8 +84,11 @@ public class CyclingEnchantmentIconOverride extends ItemOverrides {
     }
 
     private BakedModel assemble(AssembledKey key) {
-        var bgModel = this.bg.get(key.bg);
         var enchantModel = this.enchantIcons.get(key.type);
+        if (enchantModel == null) {
+            return null;
+        }
+        var bgModel = this.bg.get(key.bg);
         var enchantLevel = Integer.toString(key.level);
         var levelMark = this.levelMarks.getOrDefault(key.mark, Map.of()).get(enchantLevel);
         if (levelMark == null) {
