@@ -1,3 +1,7 @@
+plugins {
+    id "org.jetbrains.gradle.plugin.idea-ext" version "1.1.7"
+}
+
 interface EnchantIconExtension {
     // Which platform (i.e. Fabric/Forge/Quilt) is this implementation is on?
     // In case of no modding platform, use 'Vanilla'.
