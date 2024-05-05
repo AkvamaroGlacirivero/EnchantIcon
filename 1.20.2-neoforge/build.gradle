@@ -3,6 +3,8 @@ plugins {
     id 'eclipse'
     id 'idea'
     id 'net.neoforged.gradle.userdev' version '7.0.97'
+    id 'com.modrinth.minotaur' version '2.+'
+    id 'net.darkhax.curseforgegradle' version '1.1.17'
 }
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
@@ -45,4 +47,37 @@ dependencies {
     implementation "net.neoforged:neoforge:20.2.88"
     compileOnly project(":1.20.2-base")
     api "me.shedaniel.cloth:cloth-config-neoforge:12.0.119"
+}
+
+import net.darkhax.curseforgegradle.TaskPublishCurseForge
+
+tasks.register('curseforge', TaskPublishCurseForge) {
+    disableVersionDetection()
+    apiToken = System.getenv("CURSEFORGE_TOKEN") ?: "invalid"
+    def projectId = System.getenv("CURSEFORGE_PROJECT_ID") ?: "-1"
+    def mainFile = it.upload(projectId, jar)
+    mainFile.addModLoader('NeoForge')
+    mainFile.addGameVersion('1.20.2', '1.20.3', '1.20.4')
+    mainFile.releaseType = 'release'
+    mainFile.changelog = 'See git log for more info'
+    mainFile.addOptional('cloth-config')
+    onlyIf { projectId }
+}
+
+modrinth {
+    token = System.getenv("MODRINTH_TOKEN") ?: "invalid"
+    projectId = System.getenv("MODRINTH_PROJECT_ID") ?: "NaN"
+    loaders = [ 'neoforge' ]
+    gameVersions = [ '1.20.2', '1.20.3', '1.20.4' ]
+    //changelog.set(rootProject.file('CHANGELOG').text)
+    uploadFile = jar
+    versionNumber = version
+    versionType = 'release' // alpha | beta | release
+    dependencies {
+        optional.project 'cloth-config'
+    }
+}
+
+tasks.named("modrinth") {
+    onlyIf { System.getenv("MODRINTH_PROJECT_ID") }
 }
