@@ -1,0 +1,9 @@
+
+# 1.0.4-9
+
+- EnchantIcon now comes onto NeoForge for Minecraft 1.20.2 - 1.20.4.
+- EnchantIcon now comes with mod support! We added support for
+  * Armor Abilities
+  * Attack Speed Enchantment
+  * IlMusu's Enchantments
+  * Marium's Souls-like Weapons
