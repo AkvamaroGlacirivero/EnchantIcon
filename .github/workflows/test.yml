@@ -33,7 +33,7 @@ jobs:
         run: ./gradlew :1.19.4-fabric:build :1.19.4-forge:build :1.19.4-quilt:build
       - name: Test 1.19.3 Build
         id: test-build-1-19-3
-        run: ./gradlew :1.19.3-fabric:build :1.19-3.forge:build :1.19.3-quilt:build
+        run: ./gradlew :1.19.3-fabric:build :1.19.3-forge:build :1.19.3-quilt:build
       - name: Test 1.19-2 Build
         id: test-build-1-19-2
         run: ./gradlew :1.19.2-fabric:build :1.19.2-forge:build :1.19.2-quilt:build
@@ -43,6 +43,6 @@ jobs:
       - name: Test 1.17 Build
         id: test-build-1-17
         run: ./gradlew :1.17.1-fabric:build :1.17.1-forge:build
-      - name: Test 1.17 Build
+      - name: Test 1.16 Build
         id: test-build-1-16
         run: ./gradlew :1.16.5-fabric:build :1.16.5-forge:build
