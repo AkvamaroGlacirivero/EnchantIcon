@@ -39,21 +39,13 @@ public class ModConfigImpl {
                 .comment("Scope in which this mod should display enchantment icons, when the item is hand-held by someone.")
                 .translation("enchant_icon.config.scope_for_hand_held")
                 .defineEnum("scope_for_hand_held", ApplyingScope.ENCHANTED_BOOK_ONLY);
-        return (configSpec = builder.build());
-    }
 
-    @SubscribeEvent
-    public static void onConfigReload(ModConfigEvent.Reloading event) {
-        if (Constants.MOD_ID.equals(event.getConfig().getModId())) {
-            LOGGER.info("Config change detected, syncing latest config...");
-            var newConfig = new EnchantIconConfig();
-            newConfig.backgroundType = backgroundTypeProp.get();
-            newConfig.levelMarkType = levelTypeProp.get();
-            newConfig.guiScope = applyingScopeInGuiProp.get();
-            newConfig.inHandScope = applyingScopeInHandProp.get();
-            EnchantIconConfig.instance = newConfig;
-            LOGGER.info("Config synced.");
-        }
+        EnchantIconConfig.backgroundType = backgroundTypeProp;
+        EnchantIconConfig.levelMarkType = levelTypeProp;
+        EnchantIconConfig.guiScope = applyingScopeInGuiProp;
+        EnchantIconConfig.inHandScope = applyingScopeInHandProp;
+
+        return (configSpec = builder.build());
     }
 
     private static final Logger LOGGER = LoggerFactory.getLogger("EnchantIcon-Config-Watcher");

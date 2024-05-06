@@ -4,15 +4,16 @@ import mods.enchanticon.enums.ApplyingScope;
 import mods.enchanticon.enums.BackgroundType;
 import mods.enchanticon.enums.LevelMarkType;
 
-public class EnchantIconConfig {
+import java.util.function.Supplier;
 
-    public static EnchantIconConfig instance = new EnchantIconConfig();
+public final class EnchantIconConfig {
 
-    public BackgroundType backgroundType = BackgroundType.STICKY_NOTE;
+    public static Supplier<BackgroundType> backgroundType = () -> BackgroundType.STICKY_NOTE;
 
-    public LevelMarkType levelMarkType = LevelMarkType.DIGIT_COLORED;
+    public static Supplier<LevelMarkType> levelMarkType = () -> LevelMarkType.DIGIT_COLORED;
 
-    public ApplyingScope guiScope = ApplyingScope.ENCHANTED_BOOK_ONLY;
+    public static Supplier<ApplyingScope> guiScope = () -> ApplyingScope.ENCHANTED_BOOK_ONLY;
 
-    public ApplyingScope inHandScope = ApplyingScope.ENCHANTED_BOOK_ONLY;
+    public static Supplier<ApplyingScope> inHandScope = () -> ApplyingScope.ENCHANTED_BOOK_ONLY;
 }
+
