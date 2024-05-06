@@ -22,8 +22,8 @@
     },
     "intermediate_mappings": "net.fabricmc:intermediary",
     "entrypoints": {
-      "client_init": "mods.visualenchanticon.quilt.QuiltEntryPoint",
-      "modmenu": "mods.visualenchanticon.quilt.ModMenuInit"
+      "client_init": "mods.enchanticon.quilt.QuiltEntryPoint",
+      "modmenu": "mods.enchanticon.quilt.ModMenuInit"
     },
     "depends": [
       {
