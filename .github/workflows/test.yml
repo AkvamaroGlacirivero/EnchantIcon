@@ -22,6 +22,27 @@ jobs:
             ~/.gradle/caches
             ~/.gradle/wrapper
           key: $${{ runner.os }}-gradle
-      - name: Test Build
-        id: test-build
-        run: ./gradlew build
+      - name: Test 1.20.2 Build
+        id: test-build-1-20-2
+        run: ./gradlew :1.20.2-neoforge:build
+      - name: Test 1.20.1 Build
+        id: test-build-1-20-1
+        run: ./gradlew :1.20.1-fabric:build :1.20.1-forge:build :1.20.1-quilt:build
+      - name: Test 1.19.4 Build
+        id: test-build-1-19-4
+        run: ./gradlew :1.19.4-fabric:build :1.19.4-forge:build :1.19.4-quilt:build
+      - name: Test 1.19.3 Build
+        id: test-build-1-19-3
+        run: ./gradlew :1.19.3-fabric:build :1.19-3.forge:build :1.19.3-quilt:build
+      - name: Test 1.19-2 Build
+        id: test-build-1-19-2
+        run: ./gradlew :1.19.2-fabric:build :1.19.2-forge:build :1.19.2-quilt:build
+      - name: Test 1.18 Build
+        id: test-build-1-18
+        run: ./gradlew :1.18.2-fabric:build :1.18.2-forge:build :1.18.2-quilt:build
+      - name: Test 1.17 Build
+        id: test-build-1-17
+        run: ./gradlew :1.17.1-fabric:build :1.17.1-forge:build
+      - name: Test 1.17 Build
+        id: test-build-1-16
+        run: ./gradlew :1.16.5-fabric:build :1.16.5-forge:build
