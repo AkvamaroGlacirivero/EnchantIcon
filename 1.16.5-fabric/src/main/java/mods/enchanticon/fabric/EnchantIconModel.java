@@ -46,6 +46,7 @@ public class EnchantIconModel implements UnbakedModel {
             ResourceLocation iconKey = new ResourceLocation(Constants.MOD_ID, "enchant/" + registryKey.getNamespace() + "/" + registryKey.getPath());
             dependencies.add(iconKey);
         }
+        dependencies.add(new ResourceLocation(Constants.MOD_ID, "enchant/unknown"));
         for (Map<String, BlockModel> entry : this.levelMarks.values()) {
             for (BlockModel model : entry.values()) {
                 dependencies.addAll(model.getDependencies());
@@ -65,6 +66,8 @@ public class EnchantIconModel implements UnbakedModel {
             UnbakedModel model = modelGetter.apply(iconKey);
             allMaterials.addAll(model.getMaterials(modelGetter, missingTextureError));
         }
+        UnbakedModel fallbackEnchantIconModel = modelGetter.apply(new ResourceLocation(Constants.MOD_ID, "enchant/unknown"));
+        allMaterials.addAll(fallbackEnchantIconModel.getMaterials(modelGetter, missingTextureError));
         for (Map<String, BlockModel> marks : this.levelMarks.values()) {
             for (BlockModel mark : marks.values()) {
                 allMaterials.addAll(mark.getMaterials(modelGetter, missingTextureError));
@@ -96,6 +99,7 @@ public class EnchantIconModel implements UnbakedModel {
                 enchantIcons.put(registryKey, enchantIconModel);
             }
         }
+        BakedModel fallbackEnchantIcon = baker.bake(new ResourceLocation(Constants.MOD_ID, "enchant/unknown"), BlockModelRotation.X0_Y0);
         // Bake level mark models.
         Map<String, Map<String, BakedModel>> bakedLevelMarksByType = new HashMap<>();
         Map<String, BakedModel> bakedDefaultLevelMarks = new HashMap<>();
@@ -114,6 +118,6 @@ public class EnchantIconModel implements UnbakedModel {
                 }
             }
         }
-        return new BakedEnchantIconModel(bakedBg, enchantIcons, bakedLevelMarksByType, bakedDefaultLevelMarks);
+        return new BakedEnchantIconModel(bakedBg, enchantIcons, fallbackEnchantIcon, bakedLevelMarksByType, bakedDefaultLevelMarks);
     }
 }

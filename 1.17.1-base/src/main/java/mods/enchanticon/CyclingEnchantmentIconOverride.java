@@ -27,12 +27,17 @@ public class CyclingEnchantmentIconOverride extends ItemOverrides {
 
     private final Map<String, BakedModel> bg;
     private final Map<ResourceLocation, BakedModel> enchantIcons;
+    private final BakedModel defaultEnchantIcon;
     private final Map<String, BakedModel> defaultLevelMarks;
     private final Map<String, Map<String, BakedModel>> levelMarks;
 
     private final Map<AssembledKey, BakedModel> cache = new HashMap<>();
 
-    public CyclingEnchantmentIconOverride(Map<String, BakedModel> bg, Map<ResourceLocation, BakedModel> enchantIcons, Map<String, BakedModel> defaultLevelMarks, Map<String, Map<String, BakedModel>> levelMarks) {
+    public CyclingEnchantmentIconOverride(Map<String, BakedModel> bg,
+                                          Map<ResourceLocation, BakedModel> enchantIcons,
+                                          BakedModel defaultEnchantIcon,
+                                          Map<String, BakedModel> defaultLevelMarks,
+                                          Map<String, Map<String, BakedModel>> levelMarks) {
         // Note: this no-arg constructor is private for 1.19, 1.19.1 and 1.19.2.
         // Access transformer / widener is required to make this accessible from our code.
         // Forge itself has declared such AT entry on its own; while it is not the case for
@@ -41,6 +46,7 @@ public class CyclingEnchantmentIconOverride extends ItemOverrides {
         super();
         this.bg = bg;
         this.enchantIcons = enchantIcons;
+        this.defaultEnchantIcon = defaultEnchantIcon;
         this.defaultLevelMarks = defaultLevelMarks;
         this.levelMarks = levelMarks;
     }
@@ -71,11 +77,9 @@ public class CyclingEnchantmentIconOverride extends ItemOverrides {
             var assembled = this.cache.get(lookupKey);
             if (assembled == null) {
                 assembled = this.assemble(lookupKey);
-            }
-            if (assembled != null) {
                 this.cache.put(lookupKey, assembled);
-                return PuppetModel.Factory.createFrom(model, assembled, item.is(Items.ENCHANTED_BOOK));
             }
+            return PuppetModel.Factory.createFrom(model, assembled, item.is(Items.ENCHANTED_BOOK));
         }
         // Delegate to the original ItemOverrides, so things like clock and compass work properly
         ItemOverrides originalOverrides = model.getOverrides();
@@ -83,11 +87,8 @@ public class CyclingEnchantmentIconOverride extends ItemOverrides {
         return model;
     }
 
-    private @Nullable BakedModel assemble(AssembledKey key) {
-        var enchantModel = this.enchantIcons.get(key.type);
-        if (enchantModel == null) {
-            return null;
-        }
+    private BakedModel assemble(AssembledKey key) {
+        var enchantModel = this.enchantIcons.getOrDefault(key.type, this.defaultEnchantIcon);
         var bgModel = this.bg.get(key.bg);
         var enchantLevel = Integer.toString(key.level);
         var levelMark = this.levelMarks.getOrDefault(key.mark, Map.of()).get(enchantLevel);

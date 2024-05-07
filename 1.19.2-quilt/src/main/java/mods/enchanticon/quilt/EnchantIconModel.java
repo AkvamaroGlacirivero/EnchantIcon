@@ -16,6 +16,7 @@ import net.minecraft.client.resources.model.ModelState;
 import net.minecraft.client.resources.model.UnbakedModel;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -36,7 +37,7 @@ public class EnchantIconModel implements UnbakedModel {
     public Map<String, Map<String, BlockModel>> levelMarks = Map.of();
 
     @Override
-    public Collection<ResourceLocation> getDependencies() {
+    public @NotNull Collection<ResourceLocation> getDependencies() {
         var dependencies = new HashSet<ResourceLocation>();
         for (var model : this.bgModels.values()) {
             dependencies.addAll(model.getDependencies());
@@ -45,6 +46,7 @@ public class EnchantIconModel implements UnbakedModel {
             ResourceLocation iconKey = new ResourceLocation(Constants.MOD_ID, "enchant/" + registryKey.getNamespace() + "/" + registryKey.getPath());
             dependencies.add(iconKey);
         }
+        dependencies.add(new ResourceLocation(Constants.MOD_ID, "enchant/unknown"));
         for (var entry : this.levelMarks.values()) {
             for (var model : entry.values()) {
                 dependencies.addAll(model.getDependencies());
@@ -54,7 +56,7 @@ public class EnchantIconModel implements UnbakedModel {
     }
 
     @Override
-    public Collection<Material> getMaterials(Function<ResourceLocation, UnbakedModel> modelGetter, Set<Pair<String, String>> missingTextureError) {
+    public @NotNull Collection<Material> getMaterials(Function<ResourceLocation, UnbakedModel> modelGetter, Set<Pair<String, String>> missingTextureError) {
         var allMaterials = new ArrayList<Material>();
         for (var bg : this.bgModels.values()) {
             allMaterials.addAll(bg.getMaterials(modelGetter, missingTextureError));
@@ -64,6 +66,8 @@ public class EnchantIconModel implements UnbakedModel {
             var model = modelGetter.apply(iconKey);
             allMaterials.addAll(model.getMaterials(modelGetter, missingTextureError));
         }
+        var fallbackEnchantIconModel = modelGetter.apply(new ResourceLocation(Constants.MOD_ID, "enchant/unknown"));
+        allMaterials.addAll(fallbackEnchantIconModel.getMaterials(modelGetter, missingTextureError));
         for (var marks : this.levelMarks.values()) {
             for (var mark : marks.values()) {
                 allMaterials.addAll(mark.getMaterials(modelGetter, missingTextureError));
@@ -95,6 +99,7 @@ public class EnchantIconModel implements UnbakedModel {
                 enchantIcons.put(registryKey, enchantIconModel);
             }
         }
+        var fallbackEnchantIcon = baker.bake(new ResourceLocation(Constants.MOD_ID, "enchant/unknown"), BlockModelRotation.X0_Y0);
         // Bake level mark models.
         var bakedLevelMarksByType = new HashMap<String, Map<String, BakedModel>>();
         var bakedDefaultLevelMarks = new HashMap<String, BakedModel>();
@@ -113,6 +118,6 @@ public class EnchantIconModel implements UnbakedModel {
                 }
             }
         }
-        return new BakedEnchantIconModel(bakedBg, enchantIcons, bakedLevelMarksByType, bakedDefaultLevelMarks);
+        return new BakedEnchantIconModel(bakedBg, enchantIcons, fallbackEnchantIcon, bakedLevelMarksByType, bakedDefaultLevelMarks);
     }
 }

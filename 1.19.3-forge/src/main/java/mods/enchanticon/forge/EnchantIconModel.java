@@ -50,6 +50,7 @@ public class EnchantIconModel implements IUnbakedGeometry<EnchantIconModel> {
                 enchantIcons.put(registryKey, enchantIconModel);
             }
         }
+        var fallbackEnchantIcon = baker.bake(new ResourceLocation(Constants.MOD_ID, "enchant/unknown"), BlockModelRotation.X0_Y0, spriteGetter);
         // Bake level mark models.
         var bakedLevelMarksByType = new HashMap<String, Map<String, BakedModel>>();
         for (var entry : this.levelMarks.entrySet()) {
@@ -66,7 +67,7 @@ public class EnchantIconModel implements IUnbakedGeometry<EnchantIconModel> {
             var baked = raw.bake(baker, raw, spriteGetter, modelState, modelLocation, context.useBlockLight());
             bakedDefaultLevelMarks.put(entry.getKey(), baked);
         }
-        return new BakedEnchantIconModel(bakedBg, enchantIcons, bakedLevelMarksByType, bakedDefaultLevelMarks);
+        return new BakedEnchantIconModel(bakedBg, enchantIcons, fallbackEnchantIcon, bakedLevelMarksByType, bakedDefaultLevelMarks);
     }
 
     @Override
@@ -79,6 +80,8 @@ public class EnchantIconModel implements IUnbakedGeometry<EnchantIconModel> {
             var model = modelGetter.apply(iconKey);
             model.resolveParents(modelGetter);
         }
+        var fallbackEnchantIconModel = modelGetter.apply(new ResourceLocation(Constants.MOD_ID, "enchant/unknown"));
+        fallbackEnchantIconModel.resolveParents(modelGetter);
         for (var marks : this.levelMarks.values()) {
             for (var mark : marks.values()) {
                 mark.resolveParents(modelGetter);

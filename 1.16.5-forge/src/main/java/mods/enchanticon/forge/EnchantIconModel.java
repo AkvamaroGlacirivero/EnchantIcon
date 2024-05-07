@@ -54,6 +54,7 @@ public class EnchantIconModel implements IModelGeometry<EnchantIconModel> {
                 enchantIcons.put(registryKey, enchantIconModel);
             }
         }
+        BakedModel fallbackEnchantIcon = bakery.getBakedModel(new ResourceLocation(Constants.MOD_ID, "enchant/unknown"), BlockModelRotation.X0_Y0, spriteGetter);
         // Bake level mark models.
         Map<String, Map<String, BakedModel>> bakedLevelMarksByType = new HashMap<>();
         for (Map.Entry<String, Map<String, BlockModel>> entry : this.levelMarks.entrySet()) {
@@ -70,7 +71,7 @@ public class EnchantIconModel implements IModelGeometry<EnchantIconModel> {
             BakedModel baked = raw.bake(bakery, raw, spriteGetter, modelState, modelLocation, context.isSideLit());
             bakedDefaultLevelMarks.put(entry.getKey(), baked);
         }
-        return new BakedEnchantIconModel(bakedBg, enchantIcons, bakedLevelMarksByType, bakedDefaultLevelMarks);
+        return new BakedEnchantIconModel(bakedBg, enchantIcons, fallbackEnchantIcon, bakedLevelMarksByType, bakedDefaultLevelMarks);
     }
 
     @Override
@@ -84,6 +85,8 @@ public class EnchantIconModel implements IModelGeometry<EnchantIconModel> {
             UnbakedModel model = modelGetter.apply(iconKey);
             allMaterials.addAll(model.getMaterials(modelGetter, textureErrors));
         }
+        UnbakedModel fallbackEnchantIconModel = modelGetter.apply(new ResourceLocation(Constants.MOD_ID, "enchant/unknown"));
+        allMaterials.addAll(fallbackEnchantIconModel.getMaterials(modelGetter, textureErrors));
         for (Map<String, BlockModel> marks : this.levelMarks.values()) {
             for (BlockModel mark : marks.values()) {
                 allMaterials.addAll(mark.getMaterials(modelGetter, textureErrors));

@@ -19,8 +19,12 @@ public class BakedEnchantIconModel implements BakedModel {
 
     private final CyclingEnchantmentIconOverride overrides;
 
-    public BakedEnchantIconModel(Map<String, BakedModel> bg, Map<ResourceLocation, BakedModel> enchantIconModels, Map<String, Map<String, BakedModel>> levelsByType, Map<String, BakedModel> defaultLevels) {
-        this.overrides = new CyclingEnchantmentIconOverride(bg, enchantIconModels, defaultLevels, levelsByType);
+    public BakedEnchantIconModel(Map<String, BakedModel> bg,
+                                 Map<ResourceLocation, BakedModel> enchantIconModels,
+                                 BakedModel defaultEnchantIcon,
+                                 Map<String, Map<String, BakedModel>> levelsByType,
+                                 Map<String, BakedModel> defaultLevels) {
+        this.overrides = new CyclingEnchantmentIconOverride(bg, enchantIconModels, defaultEnchantIcon, defaultLevels, levelsByType);
     }
 
     @Override

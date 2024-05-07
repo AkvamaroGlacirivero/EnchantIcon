@@ -16,6 +16,7 @@ import net.minecraft.client.resources.model.ModelState;
 import net.minecraft.client.resources.model.UnbakedModel;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
@@ -34,7 +35,7 @@ public class EnchantIconModel implements UnbakedModel {
     public Map<String, Map<String, BlockModel>> levelMarks = Map.of();
 
     @Override
-    public Collection<ResourceLocation> getDependencies() {
+    public @NotNull Collection<ResourceLocation> getDependencies() {
         var dependencies = new HashSet<ResourceLocation>();
         for (var model : this.bgModels.values()) {
             dependencies.addAll(model.getDependencies());
@@ -43,6 +44,7 @@ public class EnchantIconModel implements UnbakedModel {
             ResourceLocation iconKey = new ResourceLocation(Constants.MOD_ID, "enchant/" + registryKey.getNamespace() + "/" + registryKey.getPath());
             dependencies.add(iconKey);
         }
+        dependencies.add(new ResourceLocation(Constants.MOD_ID, "enchant/unknown"));
         for (var entry : this.levelMarks.values()) {
             for (var model : entry.values()) {
                 dependencies.addAll(model.getDependencies());
@@ -61,6 +63,8 @@ public class EnchantIconModel implements UnbakedModel {
             var model = modelGetter.apply(iconKey);
             model.resolveParents(modelGetter);
         }
+        var fallbackEnchantIconModel = modelGetter.apply(new ResourceLocation(Constants.MOD_ID, "enchant/unknown"));
+        fallbackEnchantIconModel.resolveParents(modelGetter);
         for (var marks : this.levelMarks.values()) {
             for (var mark : marks.values()) {
                 mark.resolveParents(modelGetter);
@@ -91,6 +95,7 @@ public class EnchantIconModel implements UnbakedModel {
                 enchantIcons.put(registryKey, enchantIconModel);
             }
         }
+        var fallbackEnchantIcon = baker.bake(new ResourceLocation(Constants.MOD_ID, "enchant/unknown"), BlockModelRotation.X0_Y0);
         // Bake level mark models.
         var bakedLevelMarksByType = new HashMap<String, Map<String, BakedModel>>();
         var bakedDefaultLevelMarks = new HashMap<String, BakedModel>();
@@ -109,6 +114,6 @@ public class EnchantIconModel implements UnbakedModel {
                 }
             }
         }
-        return new BakedEnchantIconModel(bakedBg, enchantIcons, bakedLevelMarksByType, bakedDefaultLevelMarks);
+        return new BakedEnchantIconModel(bakedBg, enchantIcons, fallbackEnchantIcon, bakedLevelMarksByType, bakedDefaultLevelMarks);
     }
 }
