@@ -1,9 +1,20 @@
 
+# 1.0.4-10
+
+- Fix Quilt versions of EnchantIcon crashes game on start-up
+- Experimental: rewrote config system for 1.19.2 and 1.20.1 versions.
+  This is an attempt to address the reports claiming config system is not working.
+- Added support for enchantments from IlMusu's Enchantments mod.
+- If an enchantment does not have an icon, it will now show as a red question mark.
+  No more ugly purple-black checkerboard!
+
 # 1.0.4-9
 
 - EnchantIcon now comes onto NeoForge for Minecraft 1.20.2 - 1.20.4.
+- Experimental: in NeoForge version, with advanced tooltip toggled on (F3+H), EnchantIcons
+  will display registry names of all enchantments on an item in its tooltips.
+  This will help resource pack creators who wish to add support for modded enchantments.
 - EnchantIcon now comes with mod support! We added support for
   * Armor Abilities
   * Attack Speed Enchantment
-  * IlMusu's Enchantments
   * Marium's Souls-like Weapons
