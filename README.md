@@ -1,5 +1,20 @@
 # 附魔标签
 
+## I want to add support for [insert mod name]!
+
+You can add your own icons for enchantments not covered by this mod via resource pack. 
+
+No code required! Just some simple json files. 
+
+*Detailed instructions are incoming*
+
+## Supported Versions
+
+ - 🤔 = not sure
+ - ✓ = supported
+ - 🚧 = WIP
+ - ∅ = No loader support
+
 |        | Fabric | Forge | NeoForge | Quilt |
 |--------|--------|-------|----------|-------|
 | 1.14   | 🤔     | 🤔    |          |       |
@@ -25,7 +40,10 @@
 | 1.19.2 | ✓      | ✓     |          | ✓     |
 | 1.19.3 | ✓      | ✓     |          | ✓     |
 | 1.19.4 | ✓      | ✓     |          | ✓     |
-| 1.20.1 | ✓      | ✓     | 🚧       | ✓     |
-| 1.20.2 | ✓      | ✓     | 🚧       | ✓     |
-| 1.20.3 | ✓      | ✓     | 🚧       | ✓     |
-| 1.20.4 | ✓      | ✓     | 🚧       | ✓     |
+| 1.20.1 | ✓      | ✓     | ✓        | ✓     |
+| 1.20.1 | ✓      | ✓     | ✓        | ✓     |
+| 1.20.2 | ✓      | ✓     | ✓        | ✓     |
+| 1.20.3 | ✓      | ✓     | ✓        | ✓     |
+| 1.20.4 | ✓      | ✓     | ✓        | ✓     |
+| 1.20.5 | 🚧     |       | 🚧       | 🚧    |
+| 1.20.6 | 🚧     | 🚧    | 🚧       | 🚧    |
