@@ -1,3 +1,12 @@
+# 1.1.0-11
+
+- Add support for 3 vanilla mace enchantments, namely
+  * Breach
+  * Density
+  * Wind Burst
+  We are still working on a 1.20.6 port; this support is preemptive.
+- The config system rewrite introduced in last update is now ported to
+  all other supported versions.
 
 # 1.0.4-10
 
