@@ -51,10 +51,10 @@ public class ItemRendererMixin {
                     // If the applying scope is not NONE, the foil should not be displayed regardless
                     // when the hotkey is toggled or not.
                     // If the applying scope is NONE, then we let ItemStack.hasFoil to decide.
-                    return EnchantIconConfig.instance.guiScope == ApplyingScope.NONE && subject.hasFoil();
+                    return EnchantIconConfig.guiScope.get() == ApplyingScope.NONE && subject.hasFoil();
                 } else if (PuppetModel.HAND_HELD_LIKE.contains(displayContext)) {
                     // Same above.
-                    return EnchantIconConfig.instance.inHandScope == ApplyingScope.NONE && subject.hasFoil();
+                    return EnchantIconConfig.inHandScope.get() == ApplyingScope.NONE && subject.hasFoil();
                 } else {
                     return subject.hasFoil();
                 }
@@ -63,10 +63,10 @@ public class ItemRendererMixin {
                     // If the applying scope is ALL, the foil should not be displayed regardless
                     // when the hotkey is toggled or not.
                     // If the applying scope is not ALL, then we let ItemStack.hasFoil to decide.
-                    return EnchantIconConfig.instance.guiScope != ApplyingScope.ALL && subject.hasFoil();
+                    return EnchantIconConfig.guiScope.get() != ApplyingScope.ALL && subject.hasFoil();
                 } else if (PuppetModel.HAND_HELD_LIKE.contains(displayContext)) {
                     // Same above.
-                    return EnchantIconConfig.instance.inHandScope != ApplyingScope.ALL && subject.hasFoil();
+                    return EnchantIconConfig.inHandScope.get() != ApplyingScope.ALL && subject.hasFoil();
                 } else {
                     return subject.hasFoil();
                 }

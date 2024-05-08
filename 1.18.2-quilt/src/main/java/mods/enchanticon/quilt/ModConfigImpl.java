@@ -23,21 +23,15 @@ public class ModConfigImpl {
     public static TrackedValue<ApplyingScope> applyingScopeInHandProp;
 
     public static void init() {
-        CONFIG_INSTANCE.registerCallback(ModConfigImpl::onConfigUpdate);
-        onConfigUpdate(CONFIG_INSTANCE);
         backgroundTypeProp = (TrackedValue<BackgroundType>) CONFIG_INSTANCE.getValue(List.of("backgroundType"));
         levelTypeProp = (TrackedValue<LevelMarkType>) CONFIG_INSTANCE.getValue(List.of("levelMarkType"));
         applyingScopeInGuiProp = (TrackedValue<ApplyingScope>) CONFIG_INSTANCE.getValue(List.of("scopeForGuiLike"));
         applyingScopeInHandProp = (TrackedValue<ApplyingScope>) CONFIG_INSTANCE.getValue(List.of("scopeForHandHeld"));
-    }
 
-    static void onConfigUpdate(Config config) {
-        var newConfig = new EnchantIconConfig();
-        newConfig.backgroundType = (BackgroundType) config.getValue(List.of("backgroundType")).getRealValue();
-        newConfig.levelMarkType = (LevelMarkType) config.getValue(List.of("levelMarkType")).getRealValue();
-        newConfig.guiScope = (ApplyingScope) config.getValue(List.of("scopeForGuiLike")).getRealValue();
-        newConfig.inHandScope = (ApplyingScope) config.getValue(List.of("scopeForHandHeld")).getRealValue();
-        EnchantIconConfig.instance = newConfig;
+        EnchantIconConfig.backgroundType = backgroundTypeProp::value;
+        EnchantIconConfig.levelMarkType = levelTypeProp::value;
+        EnchantIconConfig.guiScope = applyingScopeInGuiProp::value;
+        EnchantIconConfig.inHandScope = applyingScopeInHandProp::value;
     }
 
     public static final class ConfigModel extends WrappedConfig {

@@ -22,10 +22,10 @@ public class ModConfigImpl implements ConfigData {
     public ApplyingScope inHandScope = ApplyingScope.ENCHANTED_BOOK_ONLY;
 
     public static InteractionResult syncConfig(ConfigHolder<ModConfigImpl> holder, ModConfigImpl config) {
-        EnchantIconConfig.instance.backgroundType = config.backgroundType;
-        EnchantIconConfig.instance.levelMarkType = config.levelMarkType;
-        EnchantIconConfig.instance.guiScope = config.guiScope;
-        EnchantIconConfig.instance.inHandScope = config.inHandScope;
+        EnchantIconConfig.backgroundType = () -> config.backgroundType;
+        EnchantIconConfig.levelMarkType = () -> config.levelMarkType;
+        EnchantIconConfig.guiScope = () -> config.guiScope;
+        EnchantIconConfig.inHandScope = () -> config.inHandScope;
         return InteractionResult.PASS;
     }
 }

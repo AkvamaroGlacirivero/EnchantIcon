@@ -73,8 +73,8 @@ public class CyclingEnchantmentIconOverride extends ItemOverrides {
             AssembledKey lookupKey = new AssembledKey(
                     ResourceLocation.tryParse(enchant.getString("id")),
                     enchant.getInt("lvl"),
-                    EnchantIconConfig.instance.backgroundType.type,
-                    EnchantIconConfig.instance.levelMarkType.type
+                    EnchantIconConfig.backgroundType.get().type,
+                    EnchantIconConfig.levelMarkType.get().type
             );
             // Get the cached model, create one if cache misses.
             BakedModel assembled = this.cache.get(lookupKey);

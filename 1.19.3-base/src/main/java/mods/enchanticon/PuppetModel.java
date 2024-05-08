@@ -99,17 +99,17 @@ public class PuppetModel implements BakedModel, ModelWithSeparateTransform {
     public BakedModel applyTransform(ItemTransforms.TransformType transformType) {
         if (this.isEnchantedBook) {
             if (GUI_LIKE.contains(transformType)) {
-                return EnchantIconConfig.instance.guiScope != ApplyingScope.NONE ? this.override : this.base;
+                return EnchantIconConfig.guiScope.get() != ApplyingScope.NONE ? this.override : this.base;
             } else if (HAND_HELD_LIKE.contains(transformType)) {
-                return EnchantIconConfig.instance.inHandScope != ApplyingScope.NONE ? this.override : this.base;
+                return EnchantIconConfig.inHandScope.get() != ApplyingScope.NONE ? this.override : this.base;
             } else {
                 return this.base;
             }
         } else {
             if (GUI_LIKE.contains(transformType)) {
-                return EnchantIconConfig.instance.guiScope == ApplyingScope.ALL ? this.override : this.base;
+                return EnchantIconConfig.guiScope.get() == ApplyingScope.ALL ? this.override : this.base;
             } else if (HAND_HELD_LIKE.contains(transformType)) {
-                return EnchantIconConfig.instance.inHandScope == ApplyingScope.ALL ? this.override : this.base;
+                return EnchantIconConfig.inHandScope.get() == ApplyingScope.ALL ? this.override : this.base;
             } else {
                 return this.base;
             }

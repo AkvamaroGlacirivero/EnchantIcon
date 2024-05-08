@@ -2,17 +2,10 @@ package mods.enchanticon.forge;
 
 import mods.enchanticon.enums.ApplyingScope;
 import mods.enchanticon.enums.BackgroundType;
-import mods.enchanticon.Constants;
 import mods.enchanticon.enums.LevelMarkType;
 import mods.enchanticon.EnchantIconConfig;
 import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.config.ModConfigEvent;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-@Mod.EventBusSubscriber(modid = Constants.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModConfigImpl {
 
     public static ForgeConfigSpec configSpec;
@@ -39,23 +32,13 @@ public class ModConfigImpl {
                 .comment("Scope in which this mod should display enchantment icons, when the item is hand-held by someone.")
                 .translation("enchant_icon.config.scope_for_hand_held")
                 .defineEnum("scope_for_hand_held", ApplyingScope.ENCHANTED_BOOK_ONLY);
+
+        EnchantIconConfig.backgroundType = backgroundTypeProp;
+        EnchantIconConfig.levelMarkType = levelTypeProp;
+        EnchantIconConfig.guiScope = applyingScopeInGuiProp;
+        EnchantIconConfig.inHandScope = applyingScopeInHandProp;
+
         return (configSpec = builder.build());
     }
-
-    @SubscribeEvent
-    public static void onConfigReload(ModConfigEvent.Reloading event) {
-        if (Constants.MOD_ID.equals(event.getConfig().getModId())) {
-            LOGGER.info("Config change detected, syncing latest config...");
-            var newConfig = new EnchantIconConfig();
-            newConfig.backgroundType = backgroundTypeProp.get();
-            newConfig.levelMarkType = levelTypeProp.get();
-            newConfig.guiScope = applyingScopeInGuiProp.get();
-            newConfig.inHandScope = applyingScopeInHandProp.get();
-            EnchantIconConfig.instance = newConfig;
-            LOGGER.info("Config synced.");
-        }
-    }
-
-    private static final Logger LOGGER = LoggerFactory.getLogger("VisualEnchantIcon-Config-Watcher");
 
 }

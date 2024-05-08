@@ -1,16 +1,11 @@
 package mods.enchanticon.forge;
 
-import mods.enchanticon.Constants;
 import mods.enchanticon.EnchantIconConfig;
 import mods.enchanticon.enums.ApplyingScope;
 import mods.enchanticon.enums.BackgroundType;
 import mods.enchanticon.enums.LevelMarkType;
 import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.config.ModConfigEvent;
 
-@Mod.EventBusSubscriber(modid = Constants.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModConfigImpl {
 
     public static ForgeConfigSpec configSpec;
@@ -37,19 +32,13 @@ public class ModConfigImpl {
                 .comment("Scope in which this mod should display enchantment icons, when the item is hand-held by someone.")
                 .translation("enchant_icon.config.scope_for_hand_held")
                 .defineEnum("scope_for_hand_held", ApplyingScope.ENCHANTED_BOOK_ONLY);
-        return (configSpec = builder.build());
-    }
 
-    @SubscribeEvent
-    public static void onConfigReload(ModConfigEvent.Reloading event) {
-        if (Constants.MOD_ID.equals(event.getConfig().getModId())) {
-            var newConfig = new EnchantIconConfig();
-            newConfig.backgroundType = backgroundTypeProp.get();
-            newConfig.levelMarkType = levelTypeProp.get();
-            newConfig.guiScope = applyingScopeInGuiProp.get();
-            newConfig.inHandScope = applyingScopeInHandProp.get();
-            EnchantIconConfig.instance = newConfig;
-        }
+        EnchantIconConfig.backgroundType = backgroundTypeProp::get;
+        EnchantIconConfig.levelMarkType = levelTypeProp::get;
+        EnchantIconConfig.guiScope = applyingScopeInGuiProp::get;
+        EnchantIconConfig.inHandScope = applyingScopeInHandProp::get;
+        
+        return (configSpec = builder.build());
     }
 
 }
