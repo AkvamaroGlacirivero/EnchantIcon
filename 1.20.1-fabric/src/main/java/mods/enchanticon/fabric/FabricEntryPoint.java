@@ -3,8 +3,10 @@ package mods.enchanticon.fabric;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 import mods.enchanticon.Constants;
+import mods.enchanticon.EnchantTooltipAppender;
 import mods.enchanticon.HotKeys;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.model.ModelLoadingRegistry;
 import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
@@ -46,6 +48,8 @@ public class FabricEntryPoint implements ClientModInitializer {
                 }
             });
         });
+
+        ItemTooltipCallback.EVENT.register(EnchantTooltipAppender::appendTooltip);
 
         if (FabricLoader.getInstance().isModLoaded("cloth-config")) {
             var config = AutoConfig.register(ModConfigImpl.class, Toml4jConfigSerializer::new);

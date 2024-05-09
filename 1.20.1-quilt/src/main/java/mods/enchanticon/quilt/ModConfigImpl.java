@@ -27,11 +27,13 @@ public class ModConfigImpl {
         levelTypeProp = (TrackedValue<LevelMarkType>) CONFIG_INSTANCE.getValue(List.of("levelMarkType"));
         applyingScopeInGuiProp = (TrackedValue<ApplyingScope>) CONFIG_INSTANCE.getValue(List.of("scopeForGuiLike"));
         applyingScopeInHandProp = (TrackedValue<ApplyingScope>) CONFIG_INSTANCE.getValue(List.of("scopeForHandHeld"));
+        TrackedValue<Boolean> showEnchantInternalNameProp = (TrackedValue<Boolean>) CONFIG_INSTANCE.getValue(List.of("showEnchantInternalName"));
 
         EnchantIconConfig.backgroundType = backgroundTypeProp::value;
         EnchantIconConfig.levelMarkType = levelTypeProp::value;
         EnchantIconConfig.guiScope = applyingScopeInGuiProp::value;
         EnchantIconConfig.inHandScope = applyingScopeInHandProp::value;
+        EnchantIconConfig.showEnchantInternalNameInTooltip = () -> showEnchantInternalNameProp.value() == Boolean.TRUE;
     }
 
     public static final class ConfigModel extends WrappedConfig {
@@ -46,5 +48,9 @@ public class ModConfigImpl {
 
         @Comment("Scope in which this mod should display enchantment icons, when the item is hand-held by someone.")
         public final ApplyingScope scopeForHandHeld = ApplyingScope.ENCHANTED_BOOK_ONLY;
+
+        @Comment("Display internal name of all enchantments on an item in their tooltips. Useful for resource pack maker.")
+        public final boolean showEnchantInternalName = false;
+
     }
 }

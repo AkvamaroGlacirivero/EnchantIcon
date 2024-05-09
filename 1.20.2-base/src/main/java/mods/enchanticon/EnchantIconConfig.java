@@ -4,6 +4,7 @@ import mods.enchanticon.enums.ApplyingScope;
 import mods.enchanticon.enums.BackgroundType;
 import mods.enchanticon.enums.LevelMarkType;
 
+import java.util.function.BooleanSupplier;
 import java.util.function.Supplier;
 
 public final class EnchantIconConfig {
@@ -15,4 +16,6 @@ public final class EnchantIconConfig {
     public static Supplier<ApplyingScope> guiScope = () -> ApplyingScope.ENCHANTED_BOOK_ONLY;
 
     public static Supplier<ApplyingScope> inHandScope = () -> ApplyingScope.ENCHANTED_BOOK_ONLY;
+
+    public static BooleanSupplier showEnchantInternalNameInTooltip = () -> false;
 }

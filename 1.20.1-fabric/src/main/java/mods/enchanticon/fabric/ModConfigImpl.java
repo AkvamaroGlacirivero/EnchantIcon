@@ -21,11 +21,14 @@ public class ModConfigImpl implements ConfigData {
 
     public ApplyingScope inHandScope = ApplyingScope.ENCHANTED_BOOK_ONLY;
 
+    public boolean showEnchantInternalName = false;
+
     public static InteractionResult syncConfig(ConfigHolder<ModConfigImpl> holder, ModConfigImpl config) {
         EnchantIconConfig.backgroundType = () -> config.backgroundType;
         EnchantIconConfig.levelMarkType = () -> config.levelMarkType;
         EnchantIconConfig.guiScope = () -> config.guiScope;
         EnchantIconConfig.inHandScope = () -> config.inHandScope;
+        EnchantIconConfig.showEnchantInternalNameInTooltip = () -> config.showEnchantInternalName;
         return InteractionResult.PASS;
     }
 }

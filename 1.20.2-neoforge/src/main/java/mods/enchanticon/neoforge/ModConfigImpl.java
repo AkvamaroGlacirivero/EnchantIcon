@@ -32,11 +32,16 @@ public class ModConfigImpl {
                 .comment("Scope in which this mod should display enchantment icons, when the item is hand-held by someone.")
                 .translation("enchant_icon.config.scope_for_hand_held")
                 .defineEnum("scope_for_hand_held", ApplyingScope.ENCHANTED_BOOK_ONLY);
+        var showEnchantInternalName = builder
+                .comment("Display internal name of all enchantments on an item in their tooltips. Useful for resource pack maker.")
+                .translation("enchant_icon.config.show_enchant_internal_name")
+                .define("show_enchant_internal_name", false);
 
         EnchantIconConfig.backgroundType = backgroundTypeProp;
         EnchantIconConfig.levelMarkType = levelTypeProp;
         EnchantIconConfig.guiScope = applyingScopeInGuiProp;
         EnchantIconConfig.inHandScope = applyingScopeInHandProp;
+        EnchantIconConfig.showEnchantInternalNameInTooltip = () -> showEnchantInternalName.get() == Boolean.TRUE;
 
         return (configSpec = builder.build());
     }

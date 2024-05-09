@@ -1,6 +1,7 @@
 package mods.enchanticon.quilt;
 
 import mods.enchanticon.Constants;
+import mods.enchanticon.EnchantTooltipAppender;
 import mods.enchanticon.HotKeys;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.model.ModelLoadingRegistry;
@@ -9,6 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import org.quiltmc.loader.api.ModContainer;
 import org.quiltmc.qsl.base.api.entrypoint.client.ClientModInitializer;
 import org.quiltmc.qsl.screen.api.client.ScreenKeyboardEvents;
+import org.quiltmc.qsl.tooltip.api.client.ItemTooltipCallback;
 
 public class QuiltEntryPoint implements ClientModInitializer {
 
@@ -51,6 +53,8 @@ public class QuiltEntryPoint implements ClientModInitializer {
                 HotKeys.isPressedWithInGUI = false;
             }
         });
+
+        ItemTooltipCallback.EVENT.register((item, player, flags, tooltips) -> EnchantTooltipAppender.appendTooltip(item, flags, tooltips));
     }
 
 }

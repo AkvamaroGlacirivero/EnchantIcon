@@ -2,6 +2,8 @@
   "enchant_icon.key": "Enchant Icon",
   "enchant_icon.key.toggle": "Toggle Enchantments Icon",
 
+  "enchant_icon.tooltip.internal_names.header": "Enchantment IDs and display names:",
+
   "enchant_icon.config": "Enchant Icon Config",
   "enchant_icon.config.general": "General",
   "enchant_icon.config.background_type": "Background Type",
