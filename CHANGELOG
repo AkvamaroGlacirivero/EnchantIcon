@@ -1,3 +1,10 @@
+# 1.1.0-12
+
+- Experimental: the "display enchantment ID" option is now controlled by a config option,
+  instead of F3+H.
+  This function is now ported to all of Fabric, Forge, NeoForge and Quilt versions of mod,
+  for 1.20 - 1.20.4.
+
 # 1.1.0-11
 
 - Add support for 3 vanilla mace enchantments, namely
