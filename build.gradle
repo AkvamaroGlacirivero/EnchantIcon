@@ -15,7 +15,7 @@ subprojects { Project p ->
 
     p.extensions.create('enchantIcon', EnchantIconExtension)
 
-    java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+    java.toolchain.languageVersion = JavaLanguageVersion.of(21)
     java.withSourcesJar()
 
     p.archivesBaseName = "EnchantIcon"
