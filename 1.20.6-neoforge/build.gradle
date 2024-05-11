@@ -1,0 +1,83 @@
+plugins {
+    id 'java-library'
+    id 'eclipse'
+    id 'idea'
+    id 'net.neoforged.gradle.userdev' version '7.0.104'
+    id 'com.modrinth.minotaur' version '2.+'
+    id 'net.darkhax.curseforgegradle' version '1.1.17'
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+enchantIcon {
+    minecraftVersion = '1.20.6'
+    platform = 'NeoForge'
+}
+
+repositories {
+    maven {
+        url = "https://maven.shedaniel.me/"
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 21
+}
+
+minecraft {
+    /*accessTransformers {
+        file rootProject.file('src/main/resources/META-INF/accesstransformer.cfg')
+    }*/
+}
+
+runs {
+    client {
+        modSource project.sourceSets.main
+        modSource project(":1.20.6-base").sourceSets.main
+    }
+
+    server {
+        programArgument '--nogui'
+        modSource project.sourceSets.main
+        modSource project(":1.20.6-base").sourceSets.main
+    }
+}
+
+dependencies {
+    implementation "net.neoforged:neoforge:20.6.48-beta"
+    compileOnly project(":1.20.6-base")
+    api "me.shedaniel.cloth:cloth-config-neoforge:14.0.126"
+}
+
+import net.darkhax.curseforgegradle.TaskPublishCurseForge
+
+tasks.register('curseforge', TaskPublishCurseForge) {
+    disableVersionDetection()
+    apiToken = System.getenv("CURSEFORGE_TOKEN") ?: "invalid"
+    def projectId = System.getenv("CURSEFORGE_PROJECT_ID") ?: "-1"
+    def mainFile = it.upload(projectId, jar)
+    mainFile.addModLoader('NeoForge')
+    mainFile.addGameVersion('1.20.5', '1.20.6')
+    mainFile.releaseType = 'release'
+    mainFile.changelog = 'See git log for more info'
+    mainFile.addOptional('cloth-config')
+    onlyIf { projectId }
+}
+
+modrinth {
+    token = System.getenv("MODRINTH_TOKEN") ?: "invalid"
+    projectId = System.getenv("MODRINTH_PROJECT_ID") ?: "NaN"
+    loaders = [ 'neoforge' ]
+    gameVersions = [ '1.20.5', '1.20.6' ]
+    //changelog.set(rootProject.file('CHANGELOG').text)
+    uploadFile = jar
+    versionNumber = version
+    versionType = 'release' // alpha | beta | release
+    dependencies {
+        optional.project 'cloth-config'
+    }
+}
+
+tasks.named("modrinth") {
+    onlyIf { System.getenv("MODRINTH_PROJECT_ID") }
+}

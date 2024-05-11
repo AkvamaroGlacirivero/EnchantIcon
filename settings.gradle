@@ -56,3 +56,4 @@ include('1.19.3-base', '1.19.3-forge', '1.19.3-fabric', '1.19.3-quilt')
 include('1.19.4-base', '1.19.4-forge', '1.19.4-fabric', '1.19.4-quilt')
 include('1.20.1-base', '1.20.1-forge', '1.20.1-fabric', '1.20.1-quilt')
 include('1.20.2-base', '1.20.2-neoforge') // NeoForge broke away from Forge upstream since 1.20.2, so here it is
+include('1.20.6-base', '1.20.6-forge', '1.20.6-fabric', '1.20.6-neoforge') // Item component since 1.20.5
