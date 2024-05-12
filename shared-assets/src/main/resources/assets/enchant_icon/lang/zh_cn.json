@@ -1,0 +1,26 @@
+{
+  "enchant_icon.key": "附魔标签",
+  "enchant_icon.key.toggle": "显示附魔标签",
+
+  "enchant_icon.tooltip.internal_names.header": "魔咒名称和对应 ID：",
+
+  "enchant_icon.config": "附魔图标设置",
+  "enchant_icon.config.general": "常规设置",
+  "enchant_icon.config.background_type": "背景类型",
+  "enchant_icon.config.background_type.tooltip": "背景的纹理类型。 ",
+  "enchant_icon.config.level_mark_type": "等级标识类型",
+  "enchant_icon.config.level_mark_type.tooltip": "魔咒等级标识的纹理类型。 ",
+  "enchant_icon.config.scope_for_gui_like": "类GUI显示适用范围",
+  "enchant_icon.config.scope_for_gui_like.tooltip": "类GUI场景（例如物品栏或物品展示框）中的已附魔物品，符合什么条件时会显示附魔标签。",
+  "enchant_icon.config.scope_for_hand_held": "手持显示适用范围",
+  "enchant_icon.config.scope_for_hand_held.tooltip": "玩家手持的已附魔物品，符合什么条件时会显示附魔标签。",
+  "enchant_icon.config.show_enchant_internal_name": "显示魔咒ID",
+  "enchant_icon.config.show_enchant_internal_name.tooltip": "启用后，会在物品的工具提示中显示魔咒的ID。",
+
+  "text.autoconfig.enchant_icon": "附魔图标设置",
+  "text.autoconfig.enchant_icon.option.backgroundType": "背景类型",
+  "text.autoconfig.enchant_icon.option.levelMarkType": "等级标识类型",
+  "text.autoconfig.enchant_icon.option.guiScope": "类GUI显示适用范围",
+  "text.autoconfig.enchant_icon.option.inHandScope": "手持显示适用范围",
+  "text.autoconfig.enchant_icon.option.showEnchantInternalName": "显示魔咒ID"
+}

@@ -13,5 +13,14 @@
   "enchant_icon.config.scope_for_gui_like": "Applying Scope For GUI-like Scenario",
   "enchant_icon.config.scope_for_gui_like.tooltip": "Scope in which this mod should display enchantment icons, when in a GUI-like scenario, for example inventory or item frame.",
   "enchant_icon.config.scope_for_hand_held": "Applying Scope For Hand-held Scenario",
-  "enchant_icon.config.scope_for_hand_held.tooltip": "Scope in which this mod should display enchantment icons, when the item is hand-held by someone."
+  "enchant_icon.config.scope_for_hand_held.tooltip": "Scope in which this mod should display enchantment icons, when the item is hand-held by someone.",
+  "enchant_icon.config.show_enchant_internal_name": "Show Enchant ID",
+  "enchant_icon.config.show_enchant_internal_name.tooltip": "When enabled, display enchantment IDs for all enchantments on an item.",
+
+  "text.autoconfig.enchant_icon": "Enchant Icon Config",
+  "text.autoconfig.enchant_icon.option.backgroundType": "Background Type",
+  "text.autoconfig.enchant_icon.option.levelMarkType": "Level Mark Type",
+  "text.autoconfig.enchant_icon.option.guiScope": "Applying Scope For GUI-like Scenario",
+  "text.autoconfig.enchant_icon.option.inHandScope": "Applying Scope For Hand-held Scenario",
+  "text.autoconfig.enchant_icon.option.showEnchantInternalName": "Show Enchant ID"
 }
